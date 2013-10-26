@@ -19,6 +19,11 @@ describe User do
   it { should respond_to(:remember_token) }
   it { should respond_to(:admin) }
   it { should respond_to(:authenticate) }
+  it { should respond_to(:memberships) }
+  it { should respond_to(:groups) }
+  it { should respond_to(:member?) }
+  it { should respond_to(:join!) }
+  it { should respond_to(:leave!) }
   # it { should respond_to(:microposts) }
   # it { should respond_to(:feed) }
   # it { should respond_to(:relationships) }
@@ -197,26 +202,26 @@ describe User do
   #   end
   # end
 
-  # describe "following" do
-  #   let(:other_user) { FactoryGirl.create(:user) }
-  #   before do
-  #     @user.save
-  #     @user.follow!(other_user)
-  #   end
+  describe "joining group" do
+    let(:group) { FactoryGirl.create(:group) }
+    before do
+      @user.save
+      @user.join!(group)
+    end
 
-  #   it { should be_following(other_user) }
-  #   its(:followed_users) { should include(other_user) }
+    it { should be_member(group) }
+    its(:groups) { should include(group) }
 
-  #   describe "followed user" do
-  #     subject { other_user }
-  #     its(:followers) { should include(@user) }
-  #   end
+    describe "group users" do
+      subject { group }
+      its(:users) { should include(@user) }
+    end
 
-  #   describe "and unfollowing" do
-  #     before { @user.unfollow!(other_user) }
+    describe "and leaving" do
+      before { @user.leave!(group) }
 
-  #     it { should_not be_following(other_user) }
-  #     its(:followed_users) { should_not include(other_user) }
-  #   end
-  # end
+      it { should_not be_member(group) }
+      its(:groups) { should_not include(group) }
+    end
+  end
 end

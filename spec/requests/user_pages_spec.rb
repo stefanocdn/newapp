@@ -85,6 +85,15 @@ describe "User pages" do
     it { should have_selector('h1',    text: user.to_s) }
     it { should have_selector('title', text: user.to_s) }
 
+    describe "group count" do
+    let(:group) { FactoryGirl.create(:group) }
+      before do
+        user.join!(group)
+        visit user_path(user)
+      end
+      it { should have_link("1 groups", href: group_user_path(user)) }
+    end
+
     # describe "microposts" do
     #   it { should have_content(m1.content) }
     #   it { should have_content(m2.content) }
@@ -234,21 +243,21 @@ describe "User pages" do
     end
   end
 
-  # describe "following/followers" do
-  #   let(:user) { FactoryGirl.create(:user) }
-  #   let(:other_user) { FactoryGirl.create(:user) }
-  #   before { user.follow!(other_user) }
+  describe "your groups" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:group) { FactoryGirl.create(:group) }
+    before { user.join!(group) }
 
-  #   describe "followed users" do
-  #     before do
-  #       sign_in user
-  #       visit following_user_path(user)
-  #     end
+    describe "membership groups" do
+      before do
+        sign_in user
+        visit group_user_path(user)
+      end
 
-  #     it { should have_selector('title', text: full_title('Following')) }
-  #     it { should have_selector('h3', text: 'Following') }
-  #     it { should have_link(other_user.name, href: user_path(other_user)) }
-  #   end
+      it { should have_selector('title', text: full_title('Your Groups')) }
+      it { should have_selector('h3', text: 'Your Groups') }
+      it { should have_link(group.name, href: group_path(group)) }
+    end
 
   #   describe "followers" do
   #     before do
@@ -260,5 +269,5 @@ describe "User pages" do
   #     it { should have_selector('h3', text: 'Followers') }
   #     it { should have_link(user.name, href: user_path(user)) }
   #   end
-  # end
+  end
 end

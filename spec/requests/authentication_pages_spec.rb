@@ -53,6 +53,7 @@ describe "Authentication" do
 
     describe "for non-signed-in users" do
       let(:user) { FactoryGirl.create(:user) }
+      let(:group) { FactoryGirl.create(:group) }
 
       describe "when attempting to visit a protected page" do
         before do
@@ -84,6 +85,13 @@ describe "Authentication" do
         end
       end
 
+      describe "in the Groups controller" do
+        describe "visiting the user page" do
+          before { visit user_group_path(group) }
+          it { should have_selector('title', text: 'Sign in') }
+        end
+      end
+
       describe "in the Users controller" do
 
         describe "visiting the edit page" do
@@ -101,10 +109,10 @@ describe "Authentication" do
           it { should have_selector('title', text: 'Sign in') }
         end
 
-        # describe "visiting the following page" do
-        #   before { visit following_user_path(user) }
-        #   it { should have_selector('title', text: 'Sign in') }
-        # end
+        describe "visiting the group page" do
+          before { visit group_user_path(user) }
+          it { should have_selector('title', text: 'Sign in') }
+        end
 
         # describe "visiting the followers page" do
         #   before { visit followers_user_path(user) }
@@ -125,17 +133,17 @@ describe "Authentication" do
       #   end
       # end
 
-      # describe "in the Relationships controller" do
-      #   describe "submitting to the create action" do
-      #     before { post relationships_path }
-      #     specify { response.should redirect_to(signin_url) }
-      #   end
+      describe "in the Membership controller" do
+        describe "submitting to the create action" do
+          before { post memberships_path }
+          specify { response.should redirect_to(signin_url) }
+        end
 
-      #   describe "submitting to the destroy action" do
-      #     before { delete relationship_path(1) }
-      #     specify { response.should redirect_to(signin_url) }
-      #   end
-      # end
+        describe "submitting to the destroy action" do
+          before { delete membership_path(1) }
+          specify { response.should redirect_to(signin_url) }
+        end
+      end
     end
 
     describe "as wrong user" do

@@ -1,0 +1,30 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <aside class="span4">
+  <section>
+	<h1><%= @user.to_s %></h1>
+	<span><%= link_to "view my profile", @user %></span>
+  </section>
+  
+  <section>
+	<%= render 'shared/stats' %>
+	<% if @groups.any? %>
+	<div class="user_avatars">
+	  <% @groups.each do |group| %>
+	    <%= link_to group.name, group %>
+	  <% end %>
+	</div>
+	<% end %>
+  </section>
+  </aside>
+
+  <div class="span8">
+	<h3><%= @title %></h3>
+	<% if @groups.any? %>
+	<ul class="users">
+	<%= render partial: 'groups/group', collection: @groups %>
+	</ul>
+	<%= will_paginate @groups %>
+	<% end %>
+  </div>
+</div>

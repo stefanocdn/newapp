@@ -1,17 +1,18 @@
-<% provide(:title, @user.to_s) %>
+<% provide(:title, @group.name) %>
 <div class="row">
   <aside class="span4">
     <section>
       <h1>
-        <%= @user.to_s %>
+        <%= @group.name %>
       </h1>
     </section>
     <section>
-      <%= render 'shared/stats' %>
+      <%= render 'stats' %>
     </section>
   </aside>
   
   <div class="span8">
+    <%= render 'join_form' if signed_in? %>
 
   </div>
 </div>

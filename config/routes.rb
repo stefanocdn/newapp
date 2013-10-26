@@ -1,6 +1,17 @@
 Newapp::Application.routes.draw do
 
-  resources :users
+  resources :users do
+    member do
+      get :group
+    end
+  end
+
+  resources :memberships, only: [:create, :destroy]
+  resources :groups do
+    member do
+      get :user
+    end
+  end
   resources :sessions, only: [:new, :create, :destroy]
   
   root to: 'static_pages#home'
