@@ -24,6 +24,10 @@ describe User do
   it { should respond_to(:member?) }
   it { should respond_to(:join!) }
   it { should respond_to(:leave!) }
+  it { should respond_to(:reviews) }
+  it { should respond_to(:reviewed_users) }
+  it { should respond_to(:reverse_reviews) }
+  it { should respond_to(:reviewers) }
   # it { should respond_to(:microposts) }
   # it { should respond_to(:feed) }
   # it { should respond_to(:relationships) }
@@ -153,6 +157,33 @@ describe User do
   describe "remember token" do
     before { @user.save }
     its(:remember_token) { should_not be_blank }
+  end
+
+  describe "review association" do
+    let(:reviewer) { FactoryGirl.create(:reviewer) }
+    let(:reviewed) { FactoryGirl.create(:reviewed) }
+    # let!(:older_review) { reviewer.reviews.build(content: "Lorem ipsum",
+    #  reviewed_id: reviewed.id, created_at: 1.day.ago) }
+    # let!(:newer_review) { reviewer.reviews.build(content: "Lorem ipsum",
+    #  reviewed_id: reviewed.id, created_at: 1.hour.ago) }
+
+    let!(:older_review) do
+      FactoryGirl.create(:review, reviewer: reviewer,
+        reviewed: reviewed, created_at: 1.day.ago)
+    end
+    let!(:newer_review) do
+      FactoryGirl.create(:review, reviewer: reviewer,
+        reviewed: reviewed, created_at: 1.hour.ago)
+    end
+
+    it "should have the right reviews in the right order" do
+      reviewer.reviews.should == [newer_review, older_review]
+    end
+
+    it "should have the right reverse reviews in the right order" do
+      reviewed.reverse_reviews.should == [newer_review, older_review]
+    end
+
   end
 
 

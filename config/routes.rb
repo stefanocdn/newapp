@@ -2,10 +2,11 @@ Newapp::Application.routes.draw do
 
   resources :users do
     member do
-      get :group
+      get :group, :reviewing, :reviewers
     end
   end
 
+  resources :reviews, only: [:index, :create, :destroy]
   resources :memberships, only: [:create, :destroy]
   resources :groups do
     member do

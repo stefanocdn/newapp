@@ -9,11 +9,23 @@ FactoryGirl.define do
     factory :admin do
       admin true
     end
+
+    factory :reviewer do
+    end
+
+    factory :reviewed do
+    end
   end
 
   factory :micropost do
     content "Lorem ipsum"
     user
+  end
+
+  factory :review do
+    content "Lorem ipsum"
+    reviewer
+    reviewed
   end
 
   factory :group do

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user,
-                only: [:index, :edit, :update, :destroy, :group]
+                only: [:index, :edit, :update, :destroy, :group, :reviewing, :reviewers]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
 
@@ -10,6 +10,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @reverse_reviews = @user.reverse_reviews.paginate(page: params[:page])
+    @reviews = @user.reviews.paginate(page: params[:page])
     # @microposts = @user.microposts.paginate(page: params[:page])
   end
 
@@ -52,6 +54,20 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @groups = @user.groups.paginate(page: params[:page])
     render 'show_groups'
+  end
+
+  def reviewing
+          @title = "Reviewing"
+          @user = User.find(params[:id])
+          @users = @user.reviewed_users.paginate(page: params[:page])
+          render 'show_review'
+  end
+
+  def reviewers
+          @title = "Reviewers"
+          @user = User.find(params[:id])
+          @users = @user.reviewers.paginate(page: params[:page])
+          render 'show_review'
   end
 
   private

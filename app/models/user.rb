@@ -10,9 +10,18 @@ class User < ActiveRecord::Base
   #                                  dependent:   :destroy
   # has_many :followers, through: :reverse_relationships, source: :follower
 
+  # Groups
   has_many :memberships, dependent: :destroy
   has_many :groups, through: :memberships
 
+  # Reviews
+  has_many :reviews, foreign_key: "reviewer_id", dependent: :destroy
+  has_many :reviewed_users, through: :reviews, source: :reviewed
+  has_many :reverse_reviews, foreign_key: "reviewed_id",
+                class_name: "Review", dependent: :destroy
+  has_many :reviewers, through: :reverse_reviews
+
+  # Callbacks
   before_save { email.downcase! }
   before_save :create_remember_token
 
@@ -57,6 +66,10 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def feed
+    reviews
+  end
+  
   private
 
     def create_remember_token

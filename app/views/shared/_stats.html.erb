@@ -6,4 +6,18 @@
     </strong>
     groups
   </a>
+
+    <a href="<%= reviewing_user_path(@user) %>">
+	<strong id="reviewing" class="stat">
+	<%= @user.reviewed_users.count %>
+	</strong>
+	reviewing
+  </a>
+
+  <a href="<%= reviewers_user_path(@user) %>">
+	<strong id="reviewers" class="stat">
+	<%= @user.reviewers.count %>
+	</strong>
+	reviewers
+  </a>
 </div>

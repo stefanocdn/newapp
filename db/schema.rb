@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131026004545) do
+ActiveRecord::Schema.define(:version => 20131027162955) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,19 @@ ActiveRecord::Schema.define(:version => 20131026004545) do
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
+
+  create_table "reviews", :force => true do |t|
+    t.integer  "reviewer_id"
+    t.integer  "reviewed_id"
+    t.text     "content"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "reviews", ["reviewed_id", "created_at"], :name => "index_reviews_on_reviewed_id_and_created_at"
+  add_index "reviews", ["reviewed_id"], :name => "index_reviews_on_reviewed_id"
+  add_index "reviews", ["reviewer_id", "created_at"], :name => "index_reviews_on_reviewer_id_and_created_at"
+  add_index "reviews", ["reviewer_id"], :name => "index_reviews_on_reviewer_id"
 
   create_table "users", :force => true do |t|
     t.string   "first_name"

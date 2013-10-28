@@ -114,10 +114,33 @@ describe "Authentication" do
           it { should have_selector('title', text: 'Sign in') }
         end
 
+        describe "visiting the reviewers page" do
+          before { visit reviewers_user_path(user) }
+          it { should have_selector('title', text: 'Sign in') }
+        end
+
+        describe "visiting the reviewed page" do
+          before { visit reviewing_user_path(user) }
+          it { should have_selector('title', text: 'Sign in') }
+        end
+
         # describe "visiting the followers page" do
         #   before { visit followers_user_path(user) }
         #   it { should have_selector('title', text: 'Sign in') }
         # end
+      end
+
+      describe "in the Reviews controller" do
+
+        describe "submitting to the create action" do
+          before { post reviews_path }
+          specify { response.should redirect_to(signin_url) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete review_path(FactoryGirl.create(:review)) }
+          specify { response.should redirect_to(signin_url) }
+        end
       end
 
       # describe "in the Microposts controller" do

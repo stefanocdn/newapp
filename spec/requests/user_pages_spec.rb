@@ -79,6 +79,15 @@ describe "User pages" do
     let(:user) { FactoryGirl.create(:user) }
     # let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
     # let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
+    let(:user2) { FactoryGirl.create(:user) }
+    let!(:r1) { FactoryGirl.create(:review, reviewer: user,
+        reviewed: user2) }
+    let!(:r2) { FactoryGirl.create(:review, reviewer: user,
+        reviewed: user2) }
+    let!(:r3) { FactoryGirl.create(:review, reviewer: user2,
+        reviewed: user) }
+    let!(:r4) { FactoryGirl.create(:review, reviewer: user2,
+        reviewed: user) }
 
     before { visit user_path(user) }
 
@@ -94,11 +103,17 @@ describe "User pages" do
       it { should have_link("1 groups", href: group_user_path(user)) }
     end
 
-    # describe "microposts" do
-    #   it { should have_content(m1.content) }
-    #   it { should have_content(m2.content) }
-    #   it { should have_content(user.microposts.count) }
-    # end
+    describe "reviews made" do
+      it { should have_content(r1.content) }
+      it { should have_content(r2.content) }
+      it { should have_content(user.reviews.count) }
+    end
+
+    describe "reverse reviews" do
+      it { should have_content(r3.content) }
+      it { should have_content(r4.content) }
+      it { should have_content(user.reverse_reviews.count) }
+    end
 
     # describe "follow/unfollow buttons" do
     #   let(:other_user) { FactoryGirl.create(:user) }

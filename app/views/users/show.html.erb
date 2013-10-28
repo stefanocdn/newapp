@@ -9,9 +9,26 @@
     <section>
       <%= render 'shared/stats' %>
     </section>
+    <section>
+     <%= render 'review_form' if signed_in? %>
+    </section>
   </aside>
   
   <div class="span8">
-
+    <h3>Reviews Received (<%= @user.reverse_reviews.count %>)</h3>
+    <% if @user.reverse_reviews.any? %>
+    <ul class="reviews">
+      <%= render partial: 'reviews/reverse_review', collection: @reverse_reviews %>
+    </ul>
+    <%= will_paginate @reverse_reviews %>
+    <% end %>
+    <hr>
+    <h3>Reviews Made (<%= @user.reviews.count %>)</h3>
+    <% if @user.reviews.any? %>
+    <ul class="reviews">
+      <%= render @reviews %>
+    </ul>
+    <%= will_paginate @reviews %>
+    <% end %>
   </div>
 </div>
