@@ -3,7 +3,7 @@ before_filter :signed_in_user, only: [:create, :destroy]
 before_filter :correct_user,   only: :destroy
 
   def index
-  	@reviews = Review.all
+  	@reviews = Review.paginate(page: params[:page])
   end
 
   def create

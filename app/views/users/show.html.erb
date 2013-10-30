@@ -3,6 +3,7 @@
   <aside class="span4">
     <section>
       <h1>
+        <%= link_to image_tag(@user.avatar_url(:profile)), @user %>
         <%= @user.to_s %>
       </h1>
     </section>

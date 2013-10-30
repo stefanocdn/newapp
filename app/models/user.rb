@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation
+  attr_accessible :first_name, :last_name, :email, :password, :password_confirmation,
+    :avatar, :remove_avatar
   has_secure_password
   
   # has_many :microposts, dependent: :destroy
@@ -9,6 +10,11 @@ class User < ActiveRecord::Base
   #                                  class_name:  "Relationship",
   #                                  dependent:   :destroy
   # has_many :followers, through: :reverse_relationships, source: :follower
+
+  # Avatar
+  mount_uploader :avatar, AvatarUploader
+
+  # Profile Attributes
 
   # Groups
   has_many :memberships, dependent: :destroy
@@ -68,6 +74,14 @@ class User < ActiveRecord::Base
 
   def feed
     reviews
+  end
+
+  def self.text_search(query)
+  if query.present?
+    where("first_name ilike :q or last_name ilike :q", q: "%#{query}%")
+  else
+    scoped
+  end
   end
   
   private

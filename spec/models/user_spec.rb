@@ -28,6 +28,7 @@ describe User do
   it { should respond_to(:reviewed_users) }
   it { should respond_to(:reverse_reviews) }
   it { should respond_to(:reviewers) }
+  it { should respond_to(:avatar) }
   # it { should respond_to(:microposts) }
   # it { should respond_to(:feed) }
   # it { should respond_to(:relationships) }

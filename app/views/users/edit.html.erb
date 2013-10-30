@@ -3,8 +3,15 @@
 
 <div class="row">
   <div class="span6 offset3">
-  <%= form_for(@user) do |f| %>
+  <%= form_for @user, :html => {:multipart => true} do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
+
+      <%= image_tag(@user.avatar_url(:profile).to_s) if @user.avatar? %>
+      <%= f.label :avatar, "My Picture" %>
+      <%= f.file_field :avatar %>
+
+      <%= f.label :remove_avatar, "Remove My Picture" %>
+      <%= f.check_box :remove_avatar %>
 
       <%= f.label :first_name, "First Name" %>
       <%= f.text_field :first_name %>

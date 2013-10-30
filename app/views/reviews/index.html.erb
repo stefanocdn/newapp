@@ -1,0 +1,17 @@
+<% provide(:title, 'All reviews') %>
+<h1>All reviews</h1>
+<ol class="microposts">
+<% @reviews.each do |review| %>
+<li id="<%= review.id %>">
+<%= link_to image_tag(review.reviewer.avatar_url(:thumb)), review.reviewer %>
+<span class="user">
+<%= link_to review.reviewer.to_s, review.reviewer %>
+</span>
+<span class="content"><%= review.content %></span>
+<span class="timestamp">
+Posted <%= time_ago_in_words(review.created_at) %> ago.
+</span>
+</li>
+<% end %>
+</ol>
+<%= will_paginate @reviews %>
