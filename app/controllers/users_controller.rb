@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @lessons = @user.lessons
     @reverse_reviews = @user.reverse_reviews.paginate(page: params[:page])
     @reviews = @user.reviews.paginate(page: params[:page])
     # @microposts = @user.microposts.paginate(page: params[:page])

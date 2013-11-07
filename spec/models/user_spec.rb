@@ -29,6 +29,7 @@ describe User do
   it { should respond_to(:reverse_reviews) }
   it { should respond_to(:reviewers) }
   it { should respond_to(:avatar) }
+  it { should respond_to(:lessons) }
   # it { should respond_to(:microposts) }
   # it { should respond_to(:feed) }
   # it { should respond_to(:relationships) }
@@ -183,6 +184,31 @@ describe User do
 
     it "should have the right reverse reviews in the right order" do
       reviewed.reverse_reviews.should == [newer_review, older_review]
+    end
+
+  end
+
+  describe "lesson associations" do
+
+    before { @user.save }
+    let!(:older_lesson) do
+      FactoryGirl.create(:lesson, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_lesson) do
+      FactoryGirl.create(:lesson, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right lessons in the right order" do
+      @user.lessons.should == [newer_lesson, older_lesson]
+    end
+
+    it "should destroy associated lessons" do
+      lessons = @user.lessons.dup
+      @user.destroy
+      lessons.should_not be_empty
+      lessons.each do |lesson|
+        Lesson.find_by_id(lesson.id).should be_nil
+      end
     end
 
   end

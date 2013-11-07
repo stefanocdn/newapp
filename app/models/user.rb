@@ -2,6 +2,9 @@ class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation,
     :avatar, :remove_avatar
   has_secure_password
+  letsrate_rater
+
+  # Stars Rater
   
   # has_many :microposts, dependent: :destroy
   # has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -13,6 +16,9 @@ class User < ActiveRecord::Base
 
   # Avatar
   mount_uploader :avatar, AvatarUploader
+
+  # Lessons
+  has_many :lessons, dependent: :destroy
 
   # Profile Attributes
 

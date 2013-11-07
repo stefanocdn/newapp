@@ -1,0 +1,17 @@
+<% provide(:title, 'New Lesson') %>
+<h1>Create a new lesson</h1>
+<div class="row">
+<div class="span6 offset3">
+<%= form_for(@lesson) do |f| %>
+<%= render 'shared/error_messages', object: f.object %>
+<%= f.label :title %>
+<%= f.text_field :title %>
+<%= f.label :content %>
+<%= f.text_area :content, :size => "25x10" %>
+<%= f.label :price, 'Price per hour' %>
+<%= f.number_field :price, :min => 0 %>
+
+<%= f.submit "Create my lesson", class: "btn btn-large btn-primary" %>
+<% end %>
+</div>
+</div>

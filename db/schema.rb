@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131028155554) do
+ActiveRecord::Schema.define(:version => 20131030162302558) do
 
   create_table "groups", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(:version => 20131028155554) do
   end
 
   add_index "groups", ["name"], :name => "index_groups_on_name", :unique => true
+
+  create_table "lessons", :force => true do |t|
+    t.string   "title"
+    t.text     "content"
+    t.decimal  "price"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "memberships", :force => true do |t|
     t.integer  "user_id"
@@ -31,6 +40,31 @@ ActiveRecord::Schema.define(:version => 20131028155554) do
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
+
+  create_table "rates", :force => true do |t|
+    t.integer  "rater_id"
+    t.integer  "rateable_id"
+    t.string   "rateable_type"
+    t.float    "stars",         :null => false
+    t.string   "dimension"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
+
+  add_index "rates", ["rateable_id", "rateable_type"], :name => "index_rates_on_rateable_id_and_rateable_type"
+  add_index "rates", ["rater_id"], :name => "index_rates_on_rater_id"
+
+  create_table "rating_caches", :force => true do |t|
+    t.integer  "cacheable_id"
+    t.string   "cacheable_type"
+    t.float    "avg",            :null => false
+    t.integer  "qty",            :null => false
+    t.string   "dimension"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
+
+  add_index "rating_caches", ["cacheable_id", "cacheable_type"], :name => "index_rating_caches_on_cacheable_id_and_cacheable_type"
 
   create_table "reviews", :force => true do |t|
     t.integer  "reviewer_id"

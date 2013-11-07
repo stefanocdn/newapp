@@ -1,0 +1,13 @@
+<li>
+<span class="title"><%= lesson.title %></span>
+<span class="price">
+Price/hour <%= number_to_currency(lesson.price) %></span>
+<span class="content"><%= lesson.content %></span>
+<span class="timestamp">
+Posted <%= time_ago_in_words(lesson.created_at) %> ago.</span>
+<% if current_user?(lesson.user) %>
+    <%= link_to "delete", lesson, method: :delete,
+                                     data: { confirm: 'You sure?' },
+                                     title: lesson.title %>
+<% end %>
+</li>

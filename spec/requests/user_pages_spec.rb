@@ -77,8 +77,9 @@ describe "User pages" do
 
   describe "profile page" do
     let(:user) { FactoryGirl.create(:user) }
-    # let!(:m1) { FactoryGirl.create(:micropost, user: user, content: "Foo") }
-    # let!(:m2) { FactoryGirl.create(:micropost, user: user, content: "Bar") }
+    let!(:l1) { FactoryGirl.create(:lesson, user: user) }
+    let!(:l2) { FactoryGirl.create(:lesson, user: user) }
+
     let(:user2) { FactoryGirl.create(:user) }
     let!(:r1) { FactoryGirl.create(:review, reviewer: user,
         reviewed: user2) }
@@ -101,6 +102,16 @@ describe "User pages" do
         visit user_path(user)
       end
       it { should have_link("1 groups", href: group_user_path(user)) }
+    end
+
+    describe "lessons" do
+      it { should have_content(l1.title) }
+      it { should have_content(l1.content) }
+      it { should have_content(l1.price) }
+      it { should have_content(l2.title) }
+      it { should have_content(l2.content) }
+      it { should have_content(l2.price) }
+      it { should have_content(user.lessons.count) }
     end
 
     describe "reviews made" do

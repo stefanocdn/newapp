@@ -13,6 +13,8 @@ gem 'jquery-rails', '2.0.2'
 gem 'pg'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'letsrate'
+# gem 'ajaxful_rating', :git => 'git://github.com/edgarjs/ajaxful-rating.git', :branch => "rails3"
 
 group :development, :test do
 gem 'rspec-rails', '2.11.0'

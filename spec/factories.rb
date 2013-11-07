@@ -22,6 +22,13 @@ FactoryGirl.define do
     user
   end
 
+  factory :lesson do
+    title "Lorem ipsum"
+    content "Lorem ipsum"
+    price 50
+    user
+  end
+
   factory :review do
     content "Lorem ipsum"
     reviewer

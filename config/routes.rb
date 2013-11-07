@@ -1,5 +1,7 @@
 Newapp::Application.routes.draw do
 
+  match '/rate' => 'rater#create', :as => 'rate'
+
   resources :users do
     member do
       get :group, :reviewing, :reviewers
@@ -14,6 +16,7 @@ Newapp::Application.routes.draw do
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
+  resources :lessons, only: [:index, :new, :create, :destroy]
   
   root to: 'static_pages#home'
 

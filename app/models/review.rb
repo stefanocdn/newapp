@@ -1,6 +1,6 @@
 class Review < ActiveRecord::Base
   attr_accessible :content, :reviewed_id
-
+  letsrate_rateable
   default_scope order: 'reviews.created_at DESC'
 
   belongs_to :reviewer, class_name: "User"

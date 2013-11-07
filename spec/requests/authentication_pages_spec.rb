@@ -143,6 +143,25 @@ describe "Authentication" do
         end
       end
 
+
+      describe "in the Lessons controller" do
+
+        describe "submitting to the new action" do
+          before { get new_lesson_path }
+          specify { response.should redirect_to(signin_url) }
+        end
+
+        describe "submitting to the create action" do
+          before { post lessons_path }
+          specify { response.should redirect_to(signin_url) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete lesson_path(FactoryGirl.create(:lesson)) }
+          specify { response.should redirect_to(signin_url) }
+        end
+      end
+
       # describe "in the Microposts controller" do
 
       #   describe "submitting to the create action" do

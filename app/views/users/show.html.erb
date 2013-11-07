@@ -13,6 +13,16 @@
     <section>
      <%= render 'review_form' if signed_in? %>
     </section>
+    <section>
+      <%= link_to "Post New Lesson", new_lesson_path,
+class: "btn btn-large btn-primary" %>
+      <% if @user.lessons.any? %>
+      <h4>Lessons (<%= @user.lessons.count %>)</h4>
+      <ul class="lessons">
+        <%= render @lessons %>
+      </ul>
+      <% end %>
+    </section>
   </aside>
   
   <div class="span8">
