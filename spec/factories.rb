@@ -29,6 +29,10 @@ FactoryGirl.define do
     user
   end
 
+  factory :category do
+    name "Math"
+  end
+
   factory :review do
     content "Lorem ipsum"
     reviewer

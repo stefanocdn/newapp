@@ -16,8 +16,8 @@ Newapp::Application.routes.draw do
     end
   end
   resources :sessions, only: [:new, :create, :destroy]
-  resources :lessons, only: [:index, :new, :create, :destroy]
-  
+  resources :lessons, only: [:index, :new, :create, :destroy, :show, :edit, :update]
+  resources :categories 
   root to: 'static_pages#home'
 
   match '/signup',  to: 'users#new'

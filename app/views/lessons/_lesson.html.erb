@@ -1,5 +1,9 @@
 <li>
 <span class="title"><%= lesson.title %></span>
+<span class="category">
+<% lesson.categories.each do |c| %>
+<%= c.name %>
+<% end %></span>
 <span class="price">
 Price/hour <%= number_to_currency(lesson.price) %></span>
 <span class="content"><%= lesson.content %></span>

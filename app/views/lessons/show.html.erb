@@ -1,0 +1,34 @@
+<h1>Lesson</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @lesson.title %>
+</p>
+
+<p>
+  <strong>Price per hour:</strong>
+  <%= number_to_currency(@lesson.price) %>
+</p>
+
+<p>
+Posted <%= time_ago_in_words(@lesson.created_at) %> ago.
+</p>
+
+<strong>Categories:</strong>
+<ul>
+<% @lesson.categories.each do |cat| %>
+  <li><%= cat.name %></li>
+<% end %>
+</ul>
+
+
+<p>
+	<strong>Content:</strong>
+<%= @lesson.content %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_lesson_path(@lesson) %> |
+  <%= link_to "Destroy", @lesson, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", lessons_path %>
+</p>

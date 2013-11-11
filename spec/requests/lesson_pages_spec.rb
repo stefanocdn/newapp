@@ -5,7 +5,12 @@ describe "Lesson Pages" do
   subject { page }
 
   let(:user) { FactoryGirl.create(:user) }
-  before { sign_in user }
+  # let(:category) { FactoryGirl.create(:category) }
+
+  before do
+    sign_in user
+    # category.save
+  end
 
   describe "lesson creation" do
     before { visit new_lesson_path }
@@ -27,6 +32,7 @@ describe "Lesson Pages" do
       before do
         fill_in "Title",         with: "Example"
         fill_in "Content",         with: "Lorem ipsum"
+        # fill_in "Categories",  with: "Math"
         fill_in "Price",        with: 50
       end
 

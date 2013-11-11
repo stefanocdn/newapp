@@ -1,5 +1,5 @@
-<% provide(:title, 'New Lesson') %>
-<h1>Create a new lesson</h1>
+<% provide(:title, 'Edit Lesson') %>
+<h1>Edit lesson</h1>
 <div class="row">
 <div class="span6 offset3">
 <%= form_for(@lesson) do |f| %>
@@ -8,7 +8,7 @@
 <%= f.text_field :title %>
 <div class="field">
 <%= f.label :category_tokens, "Categories" %>
-<%= f.text_field :category_tokens %>
+<%= f.text_field :category_tokens, data: {load: @lesson.categories} %>
 </div>
 <%= f.label :content %>
 <%= f.text_area :content, :size => "25x10" %>
@@ -16,7 +16,7 @@
 <%= f.number_field :price, :min => 0 %>
 
 
-<%= f.submit "Create my lesson", class: "btn btn-large btn-primary" %>
+<%= f.submit "Update my lesson", class: "btn btn-large btn-primary" %>
 <% end %>
 </div>
 </div>

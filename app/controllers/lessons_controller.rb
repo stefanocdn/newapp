@@ -11,11 +11,15 @@ class LessonsController < ApplicationController
 	  @lesson = current_user.lessons.build
 	end
 
+	def show
+	  @lesson = Lesson.find(params[:id])
+	end
+
 	def create
 	  @lesson = current_user.lessons.build(params[:lesson])
 	  if @lesson.save
 	  	flash[:success] = "Lesson created"
-	  	redirect_to current_user
+	  	redirect_to @lesson, notice: "Successfully created lesson!"
 	  else
 	  	render 'new'
 	  end
@@ -25,6 +29,19 @@ class LessonsController < ApplicationController
 	  @lesson.destroy
 	  redirect_to current_user
 	end
+
+	def edit
+      @lesson = Lesson.find(params[:id])
+    end
+
+    def update
+      @lesson = Lesson.find(params[:id])
+      if @lesson.update_attributes(params[:lesson])
+        redirect_to @lesson, notice: "Successfully updated lesson."
+      else
+        render :edit
+      end
+    end
 
 	private
 
