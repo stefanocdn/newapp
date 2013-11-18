@@ -10,6 +10,11 @@ Newapp::Application.routes.draw do
 
   resources :reviews, only: [:index, :create, :destroy]
   resources :memberships, only: [:create, :destroy]
+
+  resources :scholarships
+  resources :schools
+  
+  
   resources :groups do
     member do
       get :user

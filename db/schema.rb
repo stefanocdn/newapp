@@ -95,6 +95,27 @@ ActiveRecord::Schema.define(:version => 20131030162302558) do
   add_index "reviews", ["reviewer_id", "created_at"], :name => "index_reviews_on_reviewer_id_and_created_at"
   add_index "reviews", ["reviewer_id"], :name => "index_reviews_on_reviewer_id"
 
+  create_table "scholarships", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "school_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.string   "degree"
+    t.string   "field"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "scholarships", ["school_id"], :name => "index_scholarships_on_school_id"
+  add_index "scholarships", ["user_id", "school_id"], :name => "index_scholarships_on_user_id_and_school_id", :unique => true
+  add_index "scholarships", ["user_id"], :name => "index_scholarships_on_user_id"
+
+  create_table "schools", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "users", :force => true do |t|
     t.string   "first_name"
     t.string   "last_name"

@@ -177,6 +177,27 @@ describe "User pages" do
     # end
   end
 
+  describe "profile page, education and professional" do
+    let(:user) { FactoryGirl.create(:user) }
+    let!(:s1) { FactoryGirl.create(:scholarship, user: user, degree: "Bachelor", field: "Eco", school_name: "HEC") }
+    let!(:s2) { FactoryGirl.create(:scholarship, user: user, degree: "Masters", field: "Math", school_name: "X") }
+
+    before { visit user_path(user) }
+    before { click_link "Profile" }
+
+    it { should have_selector('h4', text: "Education") }
+    it { should have_selector('h4', text: "Positions") }
+
+    describe "scholarships" do
+      it { should have_content(s1.degree) }
+      it { should have_content(s2.degree) }
+      it { should have_content(s1.field) }
+      it { should have_content(s2.field) }
+      it { should have_content(s1.school.name) }
+      it { should have_content(s2.school.name) }
+    end
+  end
+
   describe "signup page" do
     before { visit signup_path }
 

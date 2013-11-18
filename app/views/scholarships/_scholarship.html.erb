@@ -1,0 +1,13 @@
+<li>
+<span class="school"><%= scholarship.school.name %></span>
+<span class="degree"><%= scholarship.degree %></span>
+<span class="field"><%= scholarship.field %></span>
+<span class="timestamp">
+<%= scholarship.start_date %> - <%= scholarship.start_date %>
+</span>
+<% if current_user?(scholarship.user) %>
+<%= link_to "delete", scholarship, method: :delete,
+data: { confirm: "You sure?" },
+title: scholarship.school.name %>
+<% end %>
+</li>

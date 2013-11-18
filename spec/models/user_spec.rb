@@ -30,6 +30,8 @@ describe User do
   it { should respond_to(:reviewers) }
   it { should respond_to(:avatar) }
   it { should respond_to(:lessons) }
+  it { should respond_to(:scholarships) }
+  it { should respond_to(:schools) }
   # it { should respond_to(:microposts) }
   # it { should respond_to(:feed) }
   # it { should respond_to(:relationships) }
@@ -282,4 +284,5 @@ describe User do
       its(:groups) { should_not include(group) }
     end
   end
+
 end

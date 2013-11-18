@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "font-awesome";
 
 /* mixins, variables, etc. */
 
@@ -22,6 +23,7 @@ body {
 
 section {
   overflow: auto;
+  // background-color: #fff;
 }
 
 textarea {
@@ -243,6 +245,26 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
+}
+
+/* scholarships */
+
+.scholarships {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+}
+
+.degree {
+  display: block;
+}
+.field {
+  display: block;
+  color: $grayLight;
 }
 
 /* lessons */

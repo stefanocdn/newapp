@@ -22,6 +22,13 @@ FactoryGirl.define do
     user
   end
 
+  factory :scholarship do
+    degree "Master"
+    field "Math"
+    user
+    school
+  end
+
   factory :lesson do
     title "Lorem ipsum"
     content "Lorem ipsum"
@@ -41,5 +48,9 @@ FactoryGirl.define do
 
   factory :group do
     name "LFNY"
+  end
+
+  factory :school do
+    name "Ecole Polytechnique"
   end
 end

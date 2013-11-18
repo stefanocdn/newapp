@@ -1,0 +1,12 @@
+<fieldset>
+
+  <%= f.label :degree, "Degree" %><br/>
+  <%= f.text_field :degree, data: {autocomplete_source: ["foo", "bar", "baz"] } %><br/>
+
+  <%= f.label :field, "Field of Study" %><br/>
+  <%= f.text_field :field %><br/>
+
+
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Remove Education" %>
+</fieldset>

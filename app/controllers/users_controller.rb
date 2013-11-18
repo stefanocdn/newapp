@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user,
-                only: [:index, :edit, :update, :destroy, :group, :reviewing, :reviewers]
+                only: [:index, :edit, :update, :destroy, :group, :reviewing, :reviewers, :dashboard]
   before_filter :correct_user,   only: [:edit, :update]
   before_filter :admin_user,     only: :destroy
 
@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @scholarships = @user.scholarships
     @lessons = @user.lessons
     @reverse_reviews = @user.reverse_reviews.paginate(page: params[:page])
     @reviews = @user.reviews.paginate(page: params[:page])
@@ -32,6 +33,7 @@ class UsersController < ApplicationController
   end
 
   def edit
+    current_user.scholarships.build
   end
 
   def update
@@ -69,6 +71,10 @@ class UsersController < ApplicationController
           @user = User.find(params[:id])
           @users = @user.reviewers.paginate(page: params[:page])
           render 'show_review'
+  end
+
+  def dashboard
+
   end
 
   private

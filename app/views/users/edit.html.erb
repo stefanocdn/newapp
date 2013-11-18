@@ -2,7 +2,15 @@
 <h1>Update your profile</h1>
 
 <div class="row">
-  <div class="span6 offset3">
+  <div class="span3">
+  <ul class="nav nav-tabs nav-stacked">
+  <li><a href="#">General Info</a></li>
+  <li><a href="#">My Picture</a></li>
+  <li><a href="#">Education</a></li>
+  </ul>
+
+  </div>
+  <div class="span6">
   <%= form_for @user, :html => {:multipart => true} do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
@@ -28,8 +36,23 @@
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
 
+      <br>
+
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
     <% end %>
+
+  </div>
+
+  <div class="span3">
+    <dl>
+  <dt>General Info</dt>
+  <dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.   </dd>
+  </dl>
 
   </div>
 </div>

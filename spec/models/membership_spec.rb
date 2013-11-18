@@ -10,7 +10,7 @@ describe Membership do
   it { should be_valid }
 
   describe "accessible attributes" do
-	it "should not allow access to group_id" do
+	it "should not allow access to user_id" do
 		expect do
 		Membership.new(user_id: user.id)
   		end.to raise_error(ActiveModel::MassAssignmentSecurity::Error)

@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation,
     :avatar, :remove_avatar
+  # , :scholarships_attributes
   has_secure_password
   letsrate_rater
 
@@ -21,6 +22,10 @@ class User < ActiveRecord::Base
   has_many :lessons, dependent: :destroy
 
   # Profile Attributes
+  has_many :schools, through: :scholarships
+  has_many :scholarships, dependent: :destroy
+  
+  # accepts_nested_attributes_for :scholarships, allow_destroy: true
 
   # Groups
   has_many :memberships, dependent: :destroy
