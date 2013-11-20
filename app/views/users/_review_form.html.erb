@@ -2,6 +2,21 @@
 
 <%= form_for(current_user.reviews.build(reviewed_id: @user.id)) do |f| %>
   
+  <legend>Please rate:</legend>
+  <div class="rating">
+    <%= f.radio_button :rating, 5 %>
+    <%= f.label :rating_5, title: "Excellent" %>
+    <%= f.radio_button :rating, 4 %>
+    <%= f.label :rating_4, title: "Very good" %>
+    <%= f.radio_button :rating, 3 %>
+    <%= f.label :rating_3, title: "Good" %>
+    <%= f.radio_button :rating, 2 %>
+    <%= f.label :rating_2, title: "Reasonable" %>
+    <%= f.radio_button :rating, 1 %>
+    <%= f.label :rating_1, title: "Bad" %>
+  </div>
+
+
   <div class="field">
     <%= f.text_area :content, placeholder: "Compose new review" %>
   </div>

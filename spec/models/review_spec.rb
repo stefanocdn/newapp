@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Review do
   let(:reviewer) { FactoryGirl.create(:user) }
   let(:reviewed) { FactoryGirl.create(:user) }
-  let(:review) { reviewer.reviews.build(content: "Lorem ipsum", reviewed_id: reviewed.id) }
+  let(:review) { reviewer.reviews.build(content: "Lorem ipsum", reviewed_id: reviewed.id, rating: 4) }
 
 	subject { review }
 
@@ -12,6 +12,7 @@ describe Review do
 	it { should respond_to(:reviewed) }
 	it { should respond_to(:reviewed_id) }
 	it { should respond_to(:content) }
+	it { should respond_to(:rating) }
 	it { should be_valid }
 
 	describe "accessible attributes" do
@@ -41,6 +42,11 @@ describe Review do
 
 	describe "with blank content" do
 	  before { review.content = " " }
+	  it { should_not be_valid }
+	end
+
+	describe "when rating is not present" do
+	  before { review.rating = nil }
 	  it { should_not be_valid }
 	end
 end

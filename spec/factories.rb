@@ -44,6 +44,7 @@ FactoryGirl.define do
     content "Lorem ipsum"
     reviewer
     reviewed
+    rating 4
   end
 
   factory :group do

@@ -1,4 +1,8 @@
 <li>
+<span class="avatar">
+<%= link_to image_tag(review.reviewed.avatar_url(:thumb)), review.reviewed %>
+</span>
+<%= render_stars(review.rating) %>
 <span class="user">
 <%= link_to review.reviewed.to_s, review.reviewed %>
 </span>

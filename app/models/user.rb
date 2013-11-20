@@ -3,7 +3,6 @@ class User < ActiveRecord::Base
     :avatar, :remove_avatar
   # , :scholarships_attributes
   has_secure_password
-  letsrate_rater
 
   # Stars Rater
   

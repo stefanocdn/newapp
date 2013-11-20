@@ -186,6 +186,18 @@ describe "Authentication" do
           specify { response.should redirect_to(signin_url) }
         end
       end
+
+      describe "in the Scholarship controller" do
+        describe "submitting to the create action" do
+          before { post scholarships_path }
+          specify { response.should redirect_to(signin_url) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete scholarship_path(1) }
+          specify { response.should redirect_to(signin_url) }
+        end
+      end
     end
 
     describe "as wrong user" do

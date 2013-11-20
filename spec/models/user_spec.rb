@@ -215,6 +215,26 @@ describe User do
 
   end
 
+  describe "scholarships associations" do
+    before { @user.save }
+    let!(:older_scholarship) do
+      FactoryGirl.create(:scholarship, user: @user, school_name: "Ecole Polytechnique", created_at: 1.day.ago)
+    end
+    let!(:newer_scholarship) do
+      FactoryGirl.create(:scholarship, user: @user, school_name: "Centrale", created_at: 1.hour.ago)
+    end
+
+    it "should destroy associated scholarships" do
+      scholarships = @user.scholarships.dup
+      @user.destroy
+      scholarships.should_not be_empty
+      scholarships.each do |sco|
+        Lesson.find_by_id(sco.id).should be_nil
+      end
+    end
+
+  end
+
 
   # describe "micropost associations" do
 

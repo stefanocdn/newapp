@@ -35,4 +35,17 @@ describe "Scholarship pages" do
 	  end
 	end
   end
+
+  describe "scholarship destruction" do
+  	before { FactoryGirl.create(:scholarship, user: user, school_name: "Centrale")}
+	
+	describe "as correct user" do
+	  before { visit user_path(user) }
+	  before { click_link "Edit Profile" }
+
+	  it "should delete a scholarship" do
+		expect { click_link "delete" }.to change(Scholarship, :count).by(-1)
+	  end
+	end
+  end
 end

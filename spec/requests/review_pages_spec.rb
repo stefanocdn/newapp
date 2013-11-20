@@ -28,9 +28,13 @@ describe "Review Pages" do
 
 	describe "with valid information" do
 
-	  before { fill_in 'review_content', with: "Lorem ipsum" }
+	  before do
+	    fill_in 'review_content', with: "Lorem ipsum"
+	    choose('Rating 4')
+	  end
 
-	  it "should create a micropost" do
+
+	  it "should create a review" do
 		expect { click_button "Post Review" }.to change(Review, :count).by(1)
 	  end
 
@@ -47,6 +51,7 @@ describe "Review Pages" do
 	describe "reviewer count" do
         before do
           visit user_path(other_user)
+          choose('Rating 4')
           fill_in 'review_content', with: "Lorem ipsum"
           click_button "Post Review"
           visit user_path(other_user)
@@ -59,6 +64,7 @@ describe "Review Pages" do
     describe "reviewing count" do
         before do
           visit user_path(other_user)
+          choose('Rating 4')
           fill_in 'review_content', with: "Lorem ipsum"
           click_button "Post Review"
           visit user_path(user)

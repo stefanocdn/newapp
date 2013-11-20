@@ -57,19 +57,6 @@ ActiveRecord::Schema.define(:version => 20131030162302558) do
   add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
-  create_table "rates", :force => true do |t|
-    t.integer  "rater_id"
-    t.integer  "rateable_id"
-    t.string   "rateable_type"
-    t.float    "stars",         :null => false
-    t.string   "dimension"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "rates", ["rateable_id", "rateable_type"], :name => "index_rates_on_rateable_id_and_rateable_type"
-  add_index "rates", ["rater_id"], :name => "index_rates_on_rater_id"
-
   create_table "rating_caches", :force => true do |t|
     t.integer  "cacheable_id"
     t.string   "cacheable_type"
@@ -88,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20131030162302558) do
     t.text     "content"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "rating"
   end
 
   add_index "reviews", ["reviewed_id", "created_at"], :name => "index_reviews_on_reviewed_id_and_created_at"

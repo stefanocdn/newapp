@@ -3,8 +3,11 @@
   <aside class="span4">
     <section>
       <h1>
-        <%= link_to image_tag(@user.avatar_url(:profile)), @user %>
-        <%= @user.to_s %>
+      <div class="avatar">
+      <%= link_to image_tag(@user.avatar_url(:profile)), @user %>
+      </div>
+      <br />
+      <%= @user.to_s %>
       </h1>
     </section>
     <section>
@@ -81,6 +84,12 @@ class: "btn btn-large btn-primary" %>
 
     <%= f.label :field, "Field of Study" %><br/>
     <%= f.text_field :field %><br/>
+
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date, discard_month: true, start_year: 1995 %>
+
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date, discard_month: true, start_year: 1995  %>
 
     <%= f.submit "Add Education", class: "btn btn-large btn-primary" %>
     <% end %>
