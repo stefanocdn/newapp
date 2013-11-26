@@ -1,0 +1,19 @@
+<% provide(:title, @title) %>
+<div class="row">
+ <div class="col-md-4">
+ 	<h3><%= @title %></h3>
+    <% if @messages.empty? %>
+      <h5>No messages in your Inbox</h5>
+    <% else %>
+      <ul class="messages">
+        <%= render partial: 'messages/message', collection: @messages %>
+      </ul>
+    <% end %>
+ </div>
+
+ <div class="col-md-8">
+ 	<%= render partial: 'messages/message', collection: @messages.conversation("Hello Mario") %>
+
+ </div>
+
+</div>

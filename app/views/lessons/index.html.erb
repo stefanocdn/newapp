@@ -1,6 +1,21 @@
 <% provide(:title, 'All lessons') %>
 <h1>All lessons</h1>
 
+<%= form_tag lessons_path, :method => 'get' do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search (Subject, Location,..)" %>
+<%= button_tag(type: "submit", class: "btn btn-primary btn-lrg") do %>
+<h4><i class="fa fa-search fa-2x"></i>  Search for a new lesson</h4>
+    <% end %>
+<% end %>
+
+<%= will_paginate %>
+
+<%= sortable "title" %>
+<%= sortable "price" %>
+<%= sortable "created_at", "Posted" %>
+
+
 <ul class="lessons">
   <%= render @lessons %>
 </ul>
+<%= will_paginate %>

@@ -57,17 +57,18 @@ ActiveRecord::Schema.define(:version => 20131030162302558) do
   add_index "memberships", ["user_id", "group_id"], :name => "index_memberships_on_user_id_and_group_id", :unique => true
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
-  create_table "rating_caches", :force => true do |t|
-    t.integer  "cacheable_id"
-    t.string   "cacheable_type"
-    t.float    "avg",            :null => false
-    t.integer  "qty",            :null => false
-    t.string   "dimension"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "messages", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "subject"
+    t.string   "body"
+    t.boolean  "sent"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "sender_id"
+    t.integer  "recipient_id"
   end
 
-  add_index "rating_caches", ["cacheable_id", "cacheable_type"], :name => "index_rating_caches_on_cacheable_id_and_cacheable_type"
+  add_index "messages", ["user_id", "created_at"], :name => "index_messages_on_user_id_and_created_at"
 
   create_table "reviews", :force => true do |t|
     t.integer  "reviewer_id"

@@ -124,6 +124,16 @@ describe "Authentication" do
           it { should have_selector('title', text: 'Sign in') }
         end
 
+        describe "visiting the inbox page" do
+          before { visit inbox_user_path(user) }
+          it { should have_selector('title', text: 'Sign in') }
+        end
+
+        describe "visiting the sent messages page" do
+          before { visit outbox_user_path(user) }
+          it { should have_selector('title', text: 'Sign in') }
+        end
+
         # describe "visiting the followers page" do
         #   before { visit followers_user_path(user) }
         #   it { should have_selector('title', text: 'Sign in') }
@@ -175,6 +185,19 @@ describe "Authentication" do
       #   end
       # end
 
+      describe "in the Messages controller" do
+
+        describe "submitting to the create action" do
+          before { post messages_path }
+          specify { response.should redirect_to(signin_url) }
+        end
+
+        describe "submitting to the destroy action" do
+          before { delete message_path(FactoryGirl.create(:message)) }
+          specify { response.should redirect_to(signin_url) }
+        end
+      end
+
       describe "in the Membership controller" do
         describe "submitting to the create action" do
           before { post memberships_path }
@@ -207,6 +230,16 @@ describe "Authentication" do
 
       describe "visiting Users#edit page" do
         before { visit edit_user_path(wrong_user) }
+        it { should have_selector('title', text: full_title('')) }
+      end
+
+      describe "visiting Users#inbox page" do
+        before { visit inbox_user_path(wrong_user) }
+        it { should have_selector('title', text: full_title('')) }
+      end
+
+      describe "visiting Users#inbox page" do
+        before { visit inbox_user_path(wrong_user) }
         it { should have_selector('title', text: full_title('')) }
       end
 

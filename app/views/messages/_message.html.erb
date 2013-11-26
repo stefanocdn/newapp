@@ -1,0 +1,15 @@
+<li id="<%= message.id %>">
+  <span class="avatar">
+  <%= link_to image_tag(message.author.avatar_url(:thumb)), message.author %>
+  </span>
+  <span class="user">
+    <%= link_to message.author.to_s, message.user %>
+  </span>
+  <span class="subject"><strong><%= message.subject %></strong></span>
+  <span class="body"><%= message.body %></span>
+  <span class="timestamp">
+    Sent <%= time_ago_in_words(message.created_at) %> ago.
+  </span>
+
+  <%= button_to "See Conversation", { :controller => :messages, :action => "index", :subject => message.subject }, :method=>:get, :remote => true %>
+</li>

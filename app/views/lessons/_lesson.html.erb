@@ -2,7 +2,7 @@
 <span class="title"><%= lesson.title %></span>
 <span class="category">
 <% lesson.categories.each do |c| %>
-<%= c.name %>
+<strong><%= c.name %></strong>
 <% end %></span>
 <span class="price">
 Price/hour <%= number_to_currency(lesson.price) %></span>

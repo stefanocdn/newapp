@@ -1,0 +1,6 @@
+  <% if current_user?(message.user) %>
+    <%= link_to(message, class: "btn btn-danger", method: :delete,
+            data: { confirm: "You sure?" }, title: message.subject)  do %>
+      <i class="fa fa-trash-o fa-lg"></i> <%= "delete" %>
+    <% end %>
+  <% end %>

@@ -1,0 +1,37 @@
+<% unless current_user?(@user) %>
+  <div class="message_form">
+  <!-- Button trigger modal -->
+  <button id="modal_btn" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Send Message</button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Send a message to <%= @user.first_name %></h4>
+      </div>
+      <div class="modal-body">
+      <%= form_for(current_user.messages.build(sender_id: current_user.id, recipient_id: @user.id), url: messages_path) do |f| %>
+
+      <%= f.hidden_field :recipient_id %>
+      <%= f.hidden_field :sender_id %>
+
+      <%= f.label :subject %>
+      <%= f.text_field :subject %>
+
+      <%= f.label :body %>
+      <%= f.text_area :body, placeholder: "Compose new message", rows: 4 %>
+
+      <%= f.submit "Send", class: "bbtn btn-primary" %>
+      <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+     </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+
+  </div>
+<% end %>

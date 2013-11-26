@@ -1,10 +1,11 @@
 class LessonsController < ApplicationController
+	helper_method :sort_column, :sort_direction
 	before_filter :signed_in_user,
                 only: [:new, :create, :destroy]
     before_filter :correct_user, only: :destroy
 
 	def index
-	  @lessons = Lesson.all
+	  @lessons = Lesson.text_search(params[:search]).order(sort_column + ' ' + sort_direction).page(params[:page]).per_page(4)
 	end
 
 	def new
@@ -49,4 +50,12 @@ class LessonsController < ApplicationController
 	  @lesson = current_user.lessons.find_by_id(params[:id])
 	  redirect_to current_user if @lesson.nil?
 	end
+
+	def sort_column
+      Lesson.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    end
+  
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    end
 end

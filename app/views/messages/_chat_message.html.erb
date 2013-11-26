@@ -1,0 +1,13 @@
+<li id="<%= chat_message.id %>">
+  <span class="avatar">
+  <%= link_to image_tag(chat_message.author.avatar_url(:thumb)), chat_message.author %>
+  </span>
+  <span class="user">
+    <%= link_to chat_message.author.to_s, chat_message.user %>
+  </span>
+  <span class="subject"><strong><%= chat_message.subject %></strong></span>
+  <span class="body"><%= chat_message.body %></span>
+  <span class="timestamp">
+    Sent <%= time_ago_in_words(chat_message.created_at) %> ago.
+  </span>
+</li>

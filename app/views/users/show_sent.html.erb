@@ -1,0 +1,30 @@
+<% provide(:title, @title) %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <div class="thumbnail text-center">
+      <%= link_to image_tag(@user.avatar_url(:profile)), @user %>
+        <div class="caption">
+        <h3>
+        <%= @user.to_s %>
+        </h3>
+        </div>
+      </div>
+      <span><%= link_to "view my profile", @user %></span>
+    </section>
+    <section>
+      <%= render 'shared/stats' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <h3><%= @title %></h3>
+    <% if @messages.empty? %>
+      <h5>No sent messages</h5>
+    <% else %>
+      <ul class="messages">
+        <%= render partial: 'messages/message', collection: @messages %>
+      </ul>
+      <%= will_paginate @messages %>
+    <% end %>
+  </div>
+</div>

@@ -4,8 +4,9 @@ gem 'rails', '3.2.14'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-gem 'bootstrap-sass', '2.1'
-gem 'font-awesome-sass-rails'
+# gem 'bootstrap-sass', '2.1'
+gem 'bootstrap-sass', '~> 3.0.2.0'
+gem "font-awesome-rails"
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
@@ -14,6 +15,7 @@ gem 'jquery-rails', '2.0.2'
 gem 'pg'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'pg_search'
 
 group :development, :test do
 gem 'rspec-rails', '2.11.0'

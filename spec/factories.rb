@@ -22,6 +22,12 @@ FactoryGirl.define do
     user
   end
 
+  factory :message do
+    subject "Lorem ipsum"
+    body "Lorem ipsum"
+    user
+  end
+
   factory :scholarship do
     degree "Master"
     field "Math"

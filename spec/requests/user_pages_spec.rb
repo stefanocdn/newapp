@@ -92,7 +92,7 @@ describe "User pages" do
 
     before { visit user_path(user) }
 
-    it { should have_selector('h1',    text: user.to_s) }
+    it { should have_selector('h3',    text: user.to_s) }
     it { should have_selector('title', text: user.to_s) }
 
     describe "group count" do
@@ -316,5 +316,34 @@ describe "User pages" do
   #     it { should have_selector('h3', text: 'Followers') }
   #     it { should have_link(user.name, href: user_path(user)) }
   #   end
+  end
+
+  describe "inbox/sent_messages" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:other_user) { FactoryGirl.create(:user) }
+    let(:message) { FactoryGirl.create(:message, user: user) }
+    before { message.send_message(user, other_user) }
+
+    describe "Sent Messages" do
+      before do
+        sign_in user
+        visit outbox_user_path(user)
+      end
+
+      it { should have_selector('title', text: full_title('Sent Messages')) }
+      it { should have_selector('h3', text: 'Sent Messages') }
+      it { should have_link(message.user.to_s, href: user_path(user)) }
+    end
+
+    describe "Inbox" do
+      before do
+        sign_in user
+        visit inbox_user_path(user)
+      end
+
+      it { should have_selector('title', text: full_title('Inbox')) }
+      it { should have_selector('h3', text: 'Inbox') }
+      # it { should have_link(message.user.to_s, href: user_path(user)) }
+    end
   end
 end

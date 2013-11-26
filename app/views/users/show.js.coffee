@@ -1,0 +1,1 @@
+$(".chute").html("<%= escape_javascript(render(partial: 'messages/message', collection: @messages)) %>")

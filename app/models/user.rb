@@ -3,8 +3,6 @@ class User < ActiveRecord::Base
     :avatar, :remove_avatar
   # , :scholarships_attributes
   has_secure_password
-
-  # Stars Rater
   
   # has_many :microposts, dependent: :destroy
   # has_many :relationships, foreign_key: "follower_id", dependent: :destroy
@@ -16,6 +14,9 @@ class User < ActiveRecord::Base
 
   # Avatar
   mount_uploader :avatar, AvatarUploader
+
+  # Messages
+  has_many :messages, dependent: :destroy
 
   # Lessons
   has_many :lessons, dependent: :destroy

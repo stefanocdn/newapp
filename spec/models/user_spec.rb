@@ -32,6 +32,8 @@ describe User do
   it { should respond_to(:lessons) }
   it { should respond_to(:scholarships) }
   it { should respond_to(:schools) }
+  it { should respond_to(:messages) }
+
   # it { should respond_to(:microposts) }
   # it { should respond_to(:feed) }
   # it { should respond_to(:relationships) }
@@ -235,6 +237,29 @@ describe User do
 
   end
 
+  describe "message associations" do
+  
+    before { @user.save }
+    let!(:older_message) do
+      FactoryGirl.create(:message, user: @user, created_at: 1.day.ago)
+    end
+    let!(:newer_message) do
+      FactoryGirl.create(:message, user: @user, created_at: 1.hour.ago)
+    end
+
+    it "should have the right messages in the right order" do
+      @user.messages.should == [newer_message, older_message]
+    end
+
+    it "should destroy associated messages" do
+      messages = @user.messages.dup
+      @user.destroy
+      messages.should_not be_empty
+      messages.each do |message|
+        Message.find_by_id(message.id).should be_nil
+      end
+    end
+  end
 
   # describe "micropost associations" do
 

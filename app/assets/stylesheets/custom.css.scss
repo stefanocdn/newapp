@@ -1,5 +1,8 @@
-@import "bootstrap";
+// $navbar-height: 60px;
+$navbar-inverse-bg: #3a87ad;
+
 @import "font-awesome";
+@import "bootstrap";
 
 /* mixins, variables, etc. */
 
@@ -18,7 +21,7 @@ html {
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 70px;
 }
 
 section {
@@ -56,7 +59,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: $grayLight;
+  color: #999;
 }
 
 p {
@@ -78,7 +81,7 @@ p {
   font-weight: bold;
   line-height: 1;
   &:hover {
-    color: white;
+    color: grey;
     text-decoration: none;
   }
 }
@@ -89,11 +92,11 @@ footer {
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $grayMediumLight;
-  color: $grayLight;
+  color: #999;
   a {
     color: $gray;
     &:hover {
-      color: $grayDarker;
+      color: #222;
     }
   }
   small {
@@ -124,7 +127,7 @@ footer {
 aside {
   section {
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid #eee;
     &:first-child {
       border: 0;
       padding-top: 0;
@@ -147,8 +150,6 @@ aside {
 .avatar {
   float: left;
   margin-right: 10px;
-  @include box_sizing;
-  border: 1px solid $grayLighter;
 }
 
 .stats {
@@ -156,7 +157,7 @@ aside {
   a {
     float: left;
     padding: 0 10px;
-    border-left: 1px solid $grayLighter;
+    border-left: 1px solid #eee;
     color: gray;
     &:first-child {
       padding-left: 0;
@@ -164,7 +165,7 @@ aside {
     }
     &:hover {
       text-decoration: none;
-      color: $blue;
+      color: #049cdb;
     }
   }
   strong {
@@ -215,9 +216,9 @@ input {
   li {
     overflow: auto;
     padding: 10px 0;
-    border-top: 1px solid $grayLighter;
+    border-top: 1px solid #eee;
     &:last-child {
-      border-bottom: 1px solid $grayLighter;
+      border-bottom: 1px solid #eee;
     }
   }
 }
@@ -226,7 +227,17 @@ input {
 
 .avatar {
   float: left;
-  margin-right: 10px;
+  margin-right: 20px;
+}
+
+.reviews {
+  list-style: none;
+  margin: 10px 0 0 0;
+
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
 }
 
 .content {
@@ -235,7 +246,9 @@ input {
 
 
 .timestamp {
-  color: $grayLight;
+  color: #999;
+  display: inline-block;
+  // float: right;
 }
 
 aside {
@@ -301,9 +314,9 @@ aside {
     left:2px;
 }
 
-/* microposts */
+/* messages */
 
-.microposts {
+.messages {
   list-style: none;
   margin: 10px 0 0 0;
 
@@ -313,12 +326,17 @@ aside {
   }
 }
 
-.content {
+.subject {
+  display: block;
+}
+
+.body {
   display: block;
 }
 
 .timestamp {
-  color: $grayLight;
+  display: block;
+  color: #999;
 }
 
 aside {
@@ -345,7 +363,7 @@ aside {
 }
 .field {
   display: block;
-  color: $grayLight;
+  color: #999;
 }
 
 /* lessons */
@@ -369,7 +387,7 @@ aside {
 }
 
 .timestamp {
-  color: $grayLight;
+  color: #999;
 }
 
 aside {
@@ -377,4 +395,30 @@ aside {
     height: 100px;
     margin-bottom: 5px;
   }
+}
+
+/* tests */
+
+//  .info span {
+// width:100%;
+// height:100%;
+// position:absolute;
+// z-index:2;
+// top:0px;
+// left:0px;
+//  }
+
+/* Sortable arrows, lessons#index */
+
+.current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.asc { 
+  background-image: url(up_arrow.gif); 
+}
+
+.desc { 
+  background-image: url(down_arrow.gif); 
 }

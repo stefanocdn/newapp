@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_filter :signed_in_user,
-                only: [:index, :edit, :update, :destroy, :group, :reviewing, :reviewers, :dashboard]
-  before_filter :correct_user,   only: [:edit, :update]
+                only: [:index, :edit, :update, :destroy, :group, :reviewing, :reviewers, :inbox, :outbox]
+  before_filter :correct_user,   only: [:edit, :update, :inbox, :outbox]
   before_filter :admin_user,     only: :destroy
 
   def index
@@ -73,8 +73,20 @@ class UsersController < ApplicationController
           render 'show_review'
   end
 
-  def dashboard
+  def inbox
+    @title = "Inbox"
+    @user = User.find(params[:id])
+    @messages = @user.messages.received(page: params[:page])
+    @last_sub = @user.messages ? @user.messages.first.subject : nil
+    @last_conv = Message.conversation(@last_sub).sent
+    render 'show_inbox'
+  end
 
+  def outbox
+    @title = "Sent Messages"
+    @user = User.find(params[:id])
+    @messages = @user.messages.sent.paginate(page: params[:page])
+    render 'show_sent'
   end
 
   private

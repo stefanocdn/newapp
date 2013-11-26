@@ -1,7 +1,7 @@
 <% provide(:title, 'New Lesson') %>
 <h1>Create a new lesson</h1>
 <div class="row">
-<div class="span6 offset3">
+<div class="col-md-6 col-md-offset-3">
 <%= form_for(@lesson) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
 <%= f.label :title %>

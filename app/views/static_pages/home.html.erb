@@ -1,12 +1,156 @@
-<div class="center hero-unit">
-<h1>Welcome to the new grouptutor app</h1>
-
-<h2>
-This is the home page for my new App. Stephane Cedroni
-</h2>
-
-<%= link_to "Sign up now!", signup_path,
-        class: "btn btn-large btn-primary" %>
+<div class="jumbotron text-center">
+	<h1>Welcome to the new grouptutor app</h1>
+	<h2>This is the home page for my new App. Stephane Cedroni</h2>
+	<a class="btn btn-default btn-lg" href="<%= signup_path%>"><i class="fa fa-download fa-lg"></i> Sign up now!</a>
+  <br/>
+  <p>
+  <div class="container">
+  <div class="row">
+  <div class="col-md-6">
+  <%= form_tag lessons_path, :method => 'get' do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search (Subject, Location,..)" %>
+  </div>
+  <div class="col-md-1">
+    <%= button_tag(type: "submit", class: "btn btn-primary btn-lrg") do %>
+    <h4><i class="fa fa-search fa-2x"></i>  Search for a new lesson</h4>
+    <% end %>
+  <% end %>
+  </div>
+  </div>
+  </div>
+  </p>
 </div>
 
-<%= link_to image_tag("rails.png", alt: "Rails"), 'http://rubyonrails.org/' %>
+<!-- Top reviewed
+    ================================================== -->
+<div class="container">
+<div class="row">
+  <div class="page-header">
+  <h1>Best of Name <small>New York</small></h1>
+  </div>
+<div class="col-md-6">
+  <div class="page-header">
+  <h3>Most reviewed <small>New York</small></h3>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="page-header">
+  <h3>Newest lessons <small>New York</small></h3>
+  </div>
+</div>
+
+<div class="col-md-2">
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="#"><span class="pull-right"></span>Math<br/><small>1242 reviews</small></a></li>
+  <li><a href="#">Spanish<br/><small>1156 reviews</small></h5></a></li>
+  <li><a href="#">Italian<br/> <small>1093 reviews</small></a></li>
+  <li><a href="#">Guitar<br/><small>912 reviews</small></a></li>
+  <li><a href="#">Yoga<br/><small>854 reviews</small></a></li>
+  <li><a href="#">Chess<br/><small>565 reviews</small></a></li>
+  <li><a href="#">Piano<br/><small>423 reviews</small></span></a></li>
+  <li><a href="#">Italian<br/><small>312 reviews</small></a></li>
+  <li><a href="#">Acting<br/><small>278 reviews</small></a></li>
+</ul>
+</div>
+<div class="col-md-4">
+  <ul class="reviews">
+    <%= render partial: 'reviews/reverse_review', collection: @reviews %>
+  </ul>
+</div>
+
+<div class="col-md-3">
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="#"><span class="pull-right">1242 reviews</span><strong>Math</strong></a></li>
+  <li><a href="#"><span class="pull-right">1156 reviews</span>Spanish</a></li>
+  <li><a href="#"><span class="pull-right">1093 reviews</span>Italian</a></li>
+  <li><a href="#"><span class="pull-right">912 reviews</span>Guitar</a></li>
+  <li><a href="#"><span class="pull-right">854 reviews</span>Yoga</a></li>
+  <li><a href="#"><span class="pull-right">565 reviews</span>Chess</a></li>
+  <li><a href="#"><span class="pull-right">423 reviews</span>Piano</a></li>
+  <li><a href="#"><span class="pull-right">312 reviews</span>Italian</a></li>
+  <li><a href="#"><span class="pull-right">278 reviews</span>Acting</a></li>
+</ul>
+</div>
+<div class="col-md-3">
+  <ul class="reviews">
+    <%= render partial: 'lessons/lesson', collection: @lessons %>
+  </ul>
+</div>
+</div>
+</div>
+
+
+<!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <div class="page-header">
+      <h1>The teachers <small>New York</small></h1>
+      </div>
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <%= image_tag "default.png", class: "img-circle center", size: "140x140" %>
+          <h2>Heading</h2>
+          Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.<br/>
+          <a class="btn btn-default" href="#" role="button">View details &raquo;</a><br/>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <%= image_tag "default.png", class: "img-circle center", size: "140x140" %>
+          <h2>Heading</h2>
+          Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.<br/>
+          <a class="btn btn-default" href="#" role="button">View details &raquo;</a><br/>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <%= image_tag "default.png", size: "140x140" %>
+          <h2>Heading</h2>
+          Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.<br/>
+          <a class="btn btn-default" href="#" role="button">View details &raquo;</a><br/>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.<br/>
+        </div>
+        <div class="col-md-5">
+          <%= image_tag "default.png", class: "featurette-image img-responsive", size: "300x300" %>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-5">
+          <%= image_tag "default.png", class: "featurette-image img-responsive", size: "300x300" %>
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.<br/>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.<br/>
+        </div>
+        <div class="col-md-5">
+          <%= image_tag "default.png", class: "featurette-image img-responsive", size: "300x300" %>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
