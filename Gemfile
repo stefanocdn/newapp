@@ -18,6 +18,7 @@ gem 'rmagick'
 gem 'pg_search'
 gem 'geocoder'
 gem 'gmaps4rails'
+gem 'rails_12factor'
 
 group :development, :test do
 gem 'rspec-rails', '2.11.0'
