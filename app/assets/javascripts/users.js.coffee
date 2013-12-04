@@ -3,9 +3,6 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 jQuery ->
+  $('.scholarship_degree').autocomplete( source: ['Master', 'PHD', 'Bachelor'])
 
-  $('form').on 'click', '.add_fields', (event) ->
-    time = new Date().getTime()
-    regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
-    event.preventDefault()
+  $('.scholarship_field').autocomplete( source: ["Engineering", "Electronics", "Elements", "Excell", "Litterature", "Architecture"])

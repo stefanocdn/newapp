@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email, :password, :password_confirmation,
     :avatar, :remove_avatar
-  # , :scholarships_attributes
+    # , :scholarships_attributes
   has_secure_password
   
   # has_many :microposts, dependent: :destroy
@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :schools, through: :scholarships
   has_many :scholarships, dependent: :destroy
   
+  # Nesting scholarship attributes
   # accepts_nested_attributes_for :scholarships, allow_destroy: true
 
   # Groups
@@ -47,8 +48,8 @@ class User < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, length: { minimum: 6 }, :unless => :password_not_required?
+  validates :password_confirmation, presence: true, :unless => :password_not_required?
   after_validation { self.errors.messages.delete(:password_digest) }
 
   # def feed
@@ -88,16 +89,20 @@ class User < ActiveRecord::Base
   end
 
   def self.text_search(query)
-  if query.present?
-    where("first_name ilike :q or last_name ilike :q", q: "%#{query}%")
-  else
-    scoped
-  end
+    if query.present?
+      where("first_name ilike :q or last_name ilike :q", q: "%#{query}%")
+    else
+      scoped
+    end
   end
   
   private
 
     def create_remember_token
       self.remember_token = SecureRandom.urlsafe_base64
+    end
+
+    def password_not_required?
+      persisted? && @password.blank? && @password_confirmation.blank?
     end
 end

@@ -5,7 +5,16 @@ class LessonsController < ApplicationController
     before_filter :correct_user, only: :destroy
 
 	def index
-	  @lessons = Lesson.text_search(params[:search]).order(sort_column + ' ' + sort_direction).page(params[:page]).per_page(4)
+	  if params[:tag]
+    	@lessons = Lesson.tagged_with(params[:tag]).order(sort_column + ' ' + sort_direction).page(params[:page]).per_page(2)
+      else
+	    @lessons = Lesson.text_search(params[:search]).order(sort_column + ' ' + sort_direction).page(params[:page]).per_page(2)
+	  end
+	  @hash = Gmaps4rails.build_markers(@lessons) do |lesson, marker|
+		marker.lat lesson.latitude
+		marker.lng lesson.longitude
+		marker.infowindow lesson.title
+	  end
 	end
 
 	def new

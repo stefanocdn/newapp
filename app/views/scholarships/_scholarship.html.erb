@@ -1,9 +1,9 @@
 <li>
-<span class="school"><%= scholarship.school.name %></span>
-<span class="degree"><%= scholarship.degree %></span>
-<span class="field"><%= scholarship.field %></span>
+<span class="school"><h3><%= scholarship.school.name %></h3></span>
+<span class="degree"><h4><%= scholarship.degree %></h4></span>
+<span class="field"><h4><%= scholarship.field %></h4></span>
 <span class="timestamp">
-<%= scholarship.start_date %> - <%= scholarship.start_date %>
+<%= scholarship.start_date.strftime("%Y") %> - <%= scholarship.end_date.strftime("%Y") %>
 </span>
 <% if current_user?(scholarship.user) %>
 <%= link_to "delete", scholarship, method: :delete,

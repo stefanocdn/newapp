@@ -1,9 +1,10 @@
 <% provide(:title, @user.to_s) %>
+<div class="container profile">
 <div class="row">
   <aside class="col-md-4">
     <section>
       <div class="thumbnail text-center">
-      <%= link_to image_tag(@user.avatar_url(:profile)), @user %>
+        <%= link_to image_tag(@user.avatar_url(:profile)), @user %>
         <div class="caption">
         <h3>
         <%= @user.to_s %>
@@ -14,87 +15,81 @@
     <section>
       <%= render 'shared/stats' %>
     </section>
-    <section>
-     <%= render 'users/review_form' if signed_in? %>
+    <section class="review_form">
+      <%= render 'users/review_form' if signed_in? %>
     </section>
+    <% if current_user?(@user) %>
     <section>
-      <%= link_to "Post New Lesson", new_lesson_path,
-class: "btn btn-large btn-primary" %>
-      
+    <%= link_to "Post New Lesson", new_lesson_path,
+    class: "btn btn-large btn-primary" %>
     </section>
-  </aside>
+    <% end %>
+  </aside><!-- aside col-md-4 -->
   
   <div class="col-md-8">
+    <%= render 'message_form' if signed_in? %> </br>
     <ul class="nav nav-tabs nav-justified" id="myTab">
-    <%= render 'message_form' if signed_in? %>
     
-    <li class="active"><a href="#home" data-toggle="tab"><span class="badge pull-right">42</span><i class="fa fa-comment"></i> Reviews</a></li>
+    <li class="active"><a href="#home" data-toggle="tab"><i class="fa fa-pencil-square-o"></i> Reviews</a></li>
     
-    <li><a href="#profile" data-toggle="tab"><i class="icon-camera-retro"></i> Profile</a></li>
+    <li><a href="#profile" data-toggle="tab"><i class="fa fa-user"></i></i> Profile</a></li>
     
     <% if current_user?(@user) %>
     <li><a href="#edit_profile" data-toggle="tab"><i class="icon-edit"></i> Edit Profile</a></li>
     <% end %>
     
-    <li><a href="#messages" data-toggle="tab"><i class="icon-bullhorn"></i> Lessons</a></li>
+    <li><a href="#messages" data-toggle="tab"><i class="fa fa-bullhorn"></i></i> Lessons</a></li>
     
-    <li><a href="#settings" data-toggle="tab"><i class="icon-group"></i> Groups</a></li>
+    <li><a href="#settings" data-toggle="tab"><i class="fa fa-users"></i> Groups</a></li>
     </ul>
 
-    <div id="myTabContent" class="tab-content">
+    <div id="myTabContent" class="tab-content"></br>
     
     <div class="tab-pane fade in active" id="home">
-    <h4>Reviews Received (<%= @user.reverse_reviews.count %>)</h4>
+      <div class="panel panel-default">
+        <div class="panel-body">
+      <h4>Reviews Received (<%= @user.reverse_reviews.count %>)</h4>
+        </div>
+      </div>
     <% if @user.reverse_reviews.any? %>
     <ul class="reviews">
       <%= render partial: 'reviews/reverse_review', collection: @reverse_reviews %>
     </ul>
-    <%= will_paginate @reverse_reviews %>
+    <%= will_paginate @reverse_reviews, renderer: BootstrapPagination::Rails %>
     <% end %>
     <hr>
-    <h4>Reviews Made (<%= @user.reviews.count %>)</h4>
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+      <h4>Reviews Made (<%= @user.reviews.count %>)</h4>
+      </div>
+    </div>
+    
     <% if @user.reviews.any? %>
     <ul class="reviews">
       <%= render @reviews %>
     </ul>
-    <%= will_paginate @reviews %>
+    <%= will_paginate @reviews, renderer: BootstrapPagination::Rails %>
     <% end %>
     </div>
 
     <div class="tab-pane fade" id="profile">
-    <h4><i class="icon-book icon-large icon-border"></i> Education</h4>
+    <h1><i class="fa fa-book"></i> Education</h1>
     <% if @user.scholarships.any? %>
-    <ul class="educations">
+    <ul class="scholarships">
       <%= render @scholarships %>
     </ul>
     <% end %>
     <br>
-    <h4><i class="icon-briefcase icon-large icon-border"></i> Positions</h4>
+    <h1><i class="fa fa-briefcase"></i> Positions</h1>
     
     </div>
 
     <div class="tab-pane fade" id="edit_profile">
     <% if current_user?(@user) %>
-    <%= form_for(current_user.scholarships.build) do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-    <div class="field">
-    <%= f.label :school_name %>
-    <%= f.text_field :school_name, data: {autocomplete_source: schools_path} %>
-    </div>
-    <%= f.label :degree, "Degree" %><br/>
-    <%= f.text_field :degree %><br/>
-
-    <%= f.label :field, "Field of Study" %><br/>
-    <%= f.text_field :field %><br/>
-
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date, discard_month: true, start_year: 1995 %>
-
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date, discard_month: true, start_year: 1995  %>
-
-    <%= f.submit "Add Education", class: "btn btn-large btn-primary" %>
-    <% end %>
+      <%= form_for(current_user.scholarships.build) do |f| %>
+        <%= render '/scholarships/scholarship_fields', f: f %>
+      <% end %>
     <% end %>
 
     <%= render @scholarships %>
@@ -112,6 +107,6 @@ class: "btn btn-large btn-primary" %>
     
     <div class="tab-pane" id="settings">...</div>
     </div>
-
-  </div>
-</div>
+  </div><!-- div col-md-8 -->
+</div><!-- row -->
+</div><!-- container -->

@@ -33,6 +33,8 @@ FactoryGirl.define do
     field "Math"
     user
     school
+    start_date 1995
+    end_date 2003
   end
 
   factory :lesson do

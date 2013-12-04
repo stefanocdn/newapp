@@ -12,8 +12,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @scholarships = @user.scholarships
     @lessons = @user.lessons
-    @reverse_reviews = @user.reverse_reviews.paginate(page: params[:page])
-    @reviews = @user.reviews.paginate(page: params[:page])
+    @reverse_reviews = @user.reverse_reviews.paginate(page: params[:page]).per_page(2)
+    @reviews = @user.reviews.paginate(page: params[:page]).per_page(2)
     # @microposts = @user.microposts.paginate(page: params[:page])
   end
 
@@ -33,7 +33,8 @@ class UsersController < ApplicationController
   end
 
   def edit
-    current_user.scholarships.build
+    @user = User.find(params[:id])
+    @scholarships = @user.scholarships
   end
 
   def update

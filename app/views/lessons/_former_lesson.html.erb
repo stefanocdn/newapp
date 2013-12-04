@@ -1,0 +1,40 @@
+<li>
+<div class="panel panel-default">
+<div class="panel-heading">
+<h3 class="panel-title"><%= lesson.title %></h3>
+</div>
+
+<div class="panel-body">
+
+<span class="photo">
+<%= link_to image_tag(lesson.user.avatar_url(:profile), size: "100x100"), lesson.user %>
+</span>
+
+<div class="body">
+<span class="category">
+<% lesson.categories.each do |cat| %>
+<%= link_to(tag_path(cat.name), class: "btn btn-primary") do %>
+<span class="glyphicon glyphicon-tag"></span> <%= cat.name %>
+<% end %>
+<% end %>
+
+</span>
+
+<span class="price">
+Price/hour : <%= number_to_currency(lesson.price) %></span>
+
+<span class="content"><%= lesson.content %></span>
+
+<span class="timestamp">
+Posted <%= time_ago_in_words(lesson.created_at) %> ago.</span>
+<% if current_user?(lesson.user) %>
+    <%= link_to "delete", lesson, method: :delete,
+                                     data: { confirm: 'You sure?' },
+                                     title: lesson.title %>
+    <i class="icon-trash"></i>
+<% end %>
+</div>
+
+</div>
+</div>
+</li>

@@ -1,5 +1,8 @@
 class Lesson < ActiveRecord::Base
-  attr_accessible :content, :price, :title, :category_tokens
+  attr_accessible :content, :price, :title, :category_tokens, :address, :latitude, :longitude
+  # Geocoding
+  geocoded_by :address
+  after_validation :geocode
 
   belongs_to :user
   has_many :categorizations, dependent: :destroy
@@ -18,7 +21,20 @@ class Lesson < ActiveRecord::Base
   validates :price, presence: true
   # validates :category_tokens, presence: true
 
-  default_scope order: 'lessons.created_at DESC'
+  # default_scope order: 'lessons.created_at DESC'
+
+  def self.tagged_with(name)
+    Category.find_by_name!(name).lessons
+  end
+
+  def self.tag_counts
+    Category.select("categories.id, categories.name, count(categorizations.category_id) as count").
+      joins(:categorizations).group("categorizations.category_id, categories.id, categories.name")
+  end
+  
+  def tag_list
+    categories.map(&:name).join(", ")
+  end
 
   def category_tokens=(tokens)
     self.category_ids = Category.ids_from_tokens(tokens)

@@ -44,6 +44,9 @@ ActiveRecord::Schema.define(:version => 20131030162302558) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "address"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "memberships", :force => true do |t|

@@ -1,6 +1,7 @@
 Newapp::Application.routes.draw do
 
   match '/rate' => 'rater#create', :as => 'rate'
+  get 'categories/:tag', to: 'lessons#index', as: :tag
 
   resources :users do
     member do

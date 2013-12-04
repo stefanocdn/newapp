@@ -1,26 +1,37 @@
 <% provide(:title, "Edit user") %>
-<h1>Update your profile</h1>
 
+<div class="container profile">
+  <h1>Update your profile</h1>
 <div class="row">
   <div class="col-md-3">
-  <ul class="nav nav-tabs nav-stacked">
-  <li><a href="#">General Info</a></li>
-  <li><a href="#">My Picture</a></li>
-  <li><a href="#">Education</a></li>
-  </ul>
-
+    <ul class="nav nav-stacked">
+    <li><a href="#profile" data-toggle="tab">
+      <i class="fa fa-user"></i> Profile</a></li>
+    <li><a href="#picture" data-toggle="tab">
+      <i class="fa fa-picture-o"></i> My Picture</a></li>
+    <li><a href="#general_info" data-toggle="tab">
+      <i class="fa fa-cog"></i> General Info</a></li>
+    </ul>
   </div>
+
   <div class="col-md-6">
-  <%= form_for @user, :html => {:multipart => true} do |f| %>
+    <div class="tab-content"><!-- Content -->
+      <div class="tab-pane active" id="profile"><!-- First tab -->
+      <h1><i class="fa fa-book"></i> Education</h1>
+      <button class="btn btn-primary"><i class="fa fa-plus"></i> Add education</button>
+      <div class="add_education">
+      <%= form_for(current_user.scholarships.build) do |f| %>
+      <%= render '/scholarships/scholarship_fields', f: f %>
+      <% end %>
+      </div>
+      <ul class="scholarships">
+      <%= render @scholarships %>
+      </ul>
+      </div>
+
+      <div class="tab-pane" id="general_info"><!-- Second tab -->
+      <%= form_for @user, :html => {:multipart => true} do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-
-      <%= image_tag(@user.avatar_url(:profile).to_s) if @user.avatar? %>
-      <%= f.label :avatar, "My Picture" %>
-      <%= f.file_field :avatar %>
-
-      <%= f.label :remove_avatar, "Remove My Picture" %>
-      <%= f.check_box :remove_avatar %>
-
       <%= f.label :first_name, "First Name" %>
       <%= f.text_field :first_name %>
 
@@ -35,24 +46,45 @@
 
       <%= f.label :password_confirmation, "Confirm Password" %>
       <%= f.password_field :password_confirmation %>
-
       <br>
-
       <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
+      <% end %>
+      </div>
 
-  </div>
+      <div class="tab-pane" id="picture"><!-- Third Tab -->
+      <%= form_for @user, :html => {:multipart => true} do |f| %>
+      <%= image_tag(@user.avatar_url(:profile).to_s) if @user.avatar? %>
+      <%= f.label :avatar, "My Picture" %>
+      <%= f.file_field :avatar %>
 
-  <div class="col-md-3">
-    <dl>
-  <dt>General Info</dt>
-  <dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-  cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-  proident, sunt in culpa qui officia deserunt mollit anim id est laborum.   </dd>
-  </dl>
+      <%= f.label :remove_avatar, "Remove My Picture" %>
+      <%= f.check_box :remove_avatar %>
+      <%= f.submit "Save Picture", class: "btn btn-large btn-primary" %>
+      <% end %>
+      </div>
 
-  </div>
+    </div><!-- Tab content -->
+  </div><!-- Col-md-6 -->
+  <div class="col-md-1">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+  <div class="col-md-1">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+  <div class="col-md-1">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+</div><!-- row -->
 </div>

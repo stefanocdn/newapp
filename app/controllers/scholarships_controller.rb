@@ -6,7 +6,7 @@ class ScholarshipsController < ApplicationController
 	  @scholarship = current_user.scholarships.build(params[:scholarship])
 		if @scholarship.save
 		  flash[:success] = "Education created!"
-		  redirect_to current_user
+		  redirect_to edit_user_path(current_user)
 		else
 		  redirect_to current_user, alert: "Wrong submission"
 		end

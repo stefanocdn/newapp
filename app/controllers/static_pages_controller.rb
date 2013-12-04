@@ -1,6 +1,6 @@
 class StaticPagesController < ApplicationController
   def home
-  	@reviews = Review.all
+  	@reviews = Review.all[0..2]
   	@lessons = Lesson.all
   end
 

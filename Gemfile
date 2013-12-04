@@ -10,12 +10,14 @@ gem "font-awesome-rails"
 gem 'bcrypt-ruby', '3.0.1'
 gem 'faker', '1.0.1'
 gem 'will_paginate', '3.0.3'
-gem 'bootstrap-will_paginate', '0.0.6'
+gem 'will_paginate-bootstrap'
 gem 'jquery-rails', '2.0.2'
 gem 'pg'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'pg_search'
+gem 'geocoder'
+gem 'gmaps4rails'
 
 group :development, :test do
 gem 'rspec-rails', '2.11.0'

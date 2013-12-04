@@ -1,18 +1,48 @@
-<li>
-<span class="title"><%= lesson.title %></span>
-<span class="category">
-<% lesson.categories.each do |c| %>
-<strong><%= c.name %></strong>
-<% end %></span>
-<span class="price">
-Price/hour <%= number_to_currency(lesson.price) %></span>
-<span class="content"><%= lesson.content %></span>
-<span class="timestamp">
-Posted <%= time_ago_in_words(lesson.created_at) %> ago.</span>
-<% if current_user?(lesson.user) %>
-    <%= link_to "delete", lesson, method: :delete,
-                                     data: { confirm: 'You sure?' },
-                                     title: lesson.title %>
-    <i class="icon-trash"></i>
-<% end %>
-</li>
+<li id="<%= lesson.id %>">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+    <h2 class="panel-title"><%= lesson.title %></h2>
+    </div>
+
+    <div class="panel-body">
+      <span class="user_info">
+      <%= link_to image_tag(lesson.user.avatar_url(:profile), size: "150x150"), lesson.user %>
+
+        <h3><%= lesson.user.to_s %></h3>
+        <span class="school">
+          <h5><i class="fa fa-book"></i> <%= lesson.user.schools.first.name %></h5>
+        </span>
+
+        <span class="review_count">
+          <h5><i class="fa fa-pencil-square-o"></i> <%= pluralize(lesson.user.reviews.count, "review") %></h5>
+        </span>
+      </span>
+
+      <span class="category">
+        <% lesson.categories.each do |cat| %>
+          <%= link_to(tag_path(cat.name), class: "btn btn-primary") do %>
+          <span class="glyphicon glyphicon-tag"></span> <%= cat.name %>
+          <% end %>
+        <% end %>
+      </span>
+
+      <span class="price">
+      	<%= number_to_currency(lesson.price) %> </br>
+        <h5>per hour</h5>
+      </span>
+      <span class="content"><%= lesson.content %></span>
+      <span class="timestamp">
+      	Posted <%= time_ago_in_words(lesson.created_at) %> ago.
+      </span>
+      <span class="view_profile">
+          <i class="fa fa-eye"></i> <%= link_to "View Profile", lesson.user %>
+        </span> 
+    	<% if current_user?(lesson.user) %>
+        <%= link_to "delete", lesson, method: :delete,
+                                         data: { confirm: 'You sure?' },
+                                         title: lesson.title %>
+        <i class="icon-trash"></i>
+    	<% end %>
+    </div><!-- panel body -->
+  </div><!-- panel panel-default -->
+</li><!-- li -->

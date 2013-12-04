@@ -1,22 +1,57 @@
 <% provide(:title, 'New Lesson') %>
-<h1>Create a new lesson</h1>
+
+<div class="center jumbotron">
+<h1>Post a new lesson</h1>
+</div>
+
+<div class="container">
 <div class="row">
-<div class="col-md-6 col-md-offset-3">
+
+<div class="col-md-3">
+<div class="list-group">
+<a href="#" class="list-group-item">
+<h4 class="list-group-item-heading">Title</h4>
+<p class="list-group-item-text">A great title is unique and descriptive! It should highlight the main characteristics of your lesson.</p>
+</a>
+
+<a href="#" class="list-group-item">
+<h4 class="list-group-item-heading">Categories</h4>
+<p class="list-group-item-text">Choose the categories of your lesson. Try to create lessons that do not include to many tags and are coherent.</p>
+</a>
+
+<a href="#" class="list-group-item">
+<h4 class="list-group-item-heading">Content</h4>
+<p class="list-group-item-text">A great content is rich and exciting! It should cover the major features of your lesson and your experience in 50 words or less</p>
+</a>
+
+<a href="#" class="list-group-item">
+<h4 class="list-group-item-heading">Setting Price</h4>
+<p class="list-group-item-text">For new lessons with no reviews, it's important to set a competitive price. Once you get your first booking and review, you can raise your price!</p>
+</a>
+</div>
+</div>
+
+<div class="col-md-6">
 <%= form_for(@lesson) do |f| %>
 <%= render 'shared/error_messages', object: f.object %>
 <%= f.label :title %>
 <%= f.text_field :title %>
+
 <div class="field">
 <%= f.label :category_tokens, "Categories" %>
 <%= f.text_field :category_tokens %>
 </div>
+<%= f.label :address %>
+<%= f.text_field :address %>
+
 <%= f.label :content %>
 <%= f.text_area :content, :size => "25x10" %>
+
 <%= f.label :price, 'Price per hour' %>
 <%= f.number_field :price, :min => 0 %>
 
-
 <%= f.submit "Create my lesson", class: "btn btn-large btn-primary" %>
 <% end %>
+</div>
 </div>
 </div>

@@ -4,6 +4,8 @@ class Scholarship < ActiveRecord::Base
   belongs_to :user
   belongs_to :school
 
+  default_scope -> { order('end_date DESC') }
+
   validates :user_id, presence: true
   validates :school_id, presence: true
   validates :degree, presence: true

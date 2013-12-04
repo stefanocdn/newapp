@@ -203,7 +203,7 @@ describe User do
     end
 
     it "should have the right lessons in the right order" do
-      @user.lessons.should == [newer_lesson, older_lesson]
+      @user.lessons.should == [older_lesson, newer_lesson]
     end
 
     it "should destroy associated lessons" do

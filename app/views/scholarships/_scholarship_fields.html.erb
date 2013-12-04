@@ -1,0 +1,21 @@
+<div class="field name">
+<%= f.label :school_name %>
+<%= f.text_field :school_name, data: {autocomplete_source: schools_path} %>
+</div>
+<div class="field name">
+<%= f.label :degree, "Degree" %><br/>
+<%= f.text_field :degree %><br/>
+</div>
+
+<div class="field name">
+<%= f.label :field, "Field of Study" %><br/>
+<%= f.text_field :field %><br/>
+</div>
+
+<%= f.label :start_date %><br />
+<%= f.date_select :start_date, discard_month: true, start_year: 1995 %>
+
+<%= f.label :end_date %><br />
+<%= f.date_select :end_date, discard_month: true, start_year: 1995  %>
+
+<%= f.submit "Add Education", class: "btn btn-large btn-primary" %>
